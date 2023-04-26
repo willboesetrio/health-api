@@ -1,6 +1,8 @@
 package com.example.demo.data;
 
+import com.example.demo.domains.encounter.EncounterRepository;
 import com.example.demo.domains.patient.Patient;
+import com.example.demo.domains.encounter.Encounter;
 import com.example.demo.domains.patient.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -11,16 +13,24 @@ public class DataLoader implements CommandLineRunner {
 
     @Autowired
     private PatientRepository patientRepository;
+    @Autowired
+    EncounterRepository encounterRepository;
     private Patient patient1;
     private Patient patient2;
     private Patient patient3;
     private Patient patient4;
     private Patient patient5;
-    private Patient patient6;
+    private Encounter encounter1;
+    private Encounter encounter2;
+    private Encounter encounter3;
+    private Encounter encounter4;
+    private Encounter encounter5;
+    private Encounter encounter6;
 
     @Override
     public void run(String... strings) throws Exception{
         loadPatients();
+        loadEncounters();
     }
 
     private void loadPatients() {
@@ -59,12 +69,13 @@ public class DataLoader implements CommandLineRunner {
                "8 Armstrong Drive",
                "Rutherfordton",
                "IL"));
-       patient6 = patientRepository.save(new Patient("VALIDATION",
-               "TESTER",
-               null,
-               null,
-               null,
-               null,
-               null));
+    }
+    private void loadEncounters(){
+        encounter1 = encounterRepository.save(new Encounter(patient1,"notes", "visit code"));
+        encounter2 = encounterRepository.save(new Encounter(patient1,"pertains to patient1", "visit code"));
+        encounter3 = encounterRepository.save(new Encounter(patient2,"notes", "visit code"));
+        encounter4 = encounterRepository.save(new Encounter(patient2,"pertains to patient2", "visit code"));
+        encounter5 = encounterRepository.save(new Encounter(patient3,"notes", "visit code333"));
+        encounter6 = encounterRepository.save(new Encounter(patient4,"notes", "visit code444"));
     }
 }

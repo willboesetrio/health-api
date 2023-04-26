@@ -1,12 +1,12 @@
 package com.example.demo.domains.patient;
 
-import org.springframework.beans.factory.annotation.Required;
+import com.example.demo.domains.encounter.Encounter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.util.Set;
 
 @Entity
 public class Patient {
@@ -15,12 +15,15 @@ public class Patient {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
     @NotNull
+    @Size(min = 3, max=25)
     private String firstName;
     @NotNull
+    @Size(min = 3, max=25)
     private String lastName;
     @NotNull
     private String ssn;
     @NotNull
+    @Column(unique = true)
     private String email;
     @NotNull
     private String street;
@@ -28,6 +31,9 @@ public class Patient {
     private String city;
     @NotNull
     private String state;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "patient")
+    private Set<Encounter> encounters;
 
     public Patient() {
     }

@@ -3,10 +3,9 @@ package com.example.demo.domains.patient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -19,5 +18,15 @@ public class PatientController {
     @GetMapping
     public ResponseEntity<List<Patient>> getAllPatients() {
         return new ResponseEntity<>(patientService.getAll(), HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Patient> getPatientTypeById(@PathVariable Long id) {
+        return new ResponseEntity<>(patientService.getById(id), HttpStatus.OK);
+    }
+
+    @PostMapping
+    public ResponseEntity<Patient> createPatient(@Valid @RequestBody Patient patient) {
+        return new ResponseEntity<>(patientService.createPatient(patient), HttpStatus.CREATED);
     }
 }
