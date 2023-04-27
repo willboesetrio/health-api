@@ -44,8 +44,8 @@ public class Patient {
     String insurance;
     @NotNull
     private String gender;
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "patient")
-    private Set<Encounter> encounters;
+//    @OneToMany(fetch = FetchType.EAGER, mappedBy = "patient")
+//    private Set<Encounter> encounters;
 
     public Patient() {
     }

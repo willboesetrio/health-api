@@ -9,6 +9,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import com.fasterxml.jackson.annotation.*;
 
 @Entity
 @Validated
@@ -19,6 +20,9 @@ public class Encounter {
     private Long id;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "patient_id")
+    @JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
+    @JsonIdentityReference(alwaysAsId=true)
+    @JsonProperty("patient_id")
     private Patient patient;
     @NotNull
     @NotEmpty
@@ -41,7 +45,7 @@ public class Encounter {
     private double copay;
     @NotNull
     @NotEmpty
-    private String cheifComplaint;
+    private String chiefComplaint;
     private int pulse;
     private int systolic;
     private int diastolic;
@@ -51,7 +55,7 @@ public class Encounter {
     public Encounter() {
     }
 
-    public Encounter(Patient patient, String notes, String visitCode, String provider, String billingCode, String icd10, double totalCost, double copay, String cheifComplaint, int pulse, int systolic, int diastolic, Date date) {
+    public Encounter(Patient patient, String notes, String visitCode, String provider, String billingCode, String icd10, double totalCost, double copay, String chiefComplaint, int pulse, int systolic, int diastolic, Date date) {
         this.patient = patient;
         this.notes = notes;
         this.visitCode = visitCode;
@@ -60,7 +64,7 @@ public class Encounter {
         this.icd10 = icd10;
         this.totalCost = totalCost;
         this.copay = copay;
-        this.cheifComplaint = cheifComplaint;
+        this.chiefComplaint = chiefComplaint;
         this.pulse = pulse;
         this.systolic = systolic;
         this.diastolic = diastolic;
@@ -139,12 +143,12 @@ public class Encounter {
         this.copay = copay;
     }
 
-    public String getCheifComplaint() {
-        return cheifComplaint;
+    public String getChiefComplaint() {
+        return chiefComplaint;
     }
 
-    public void setCheifComplaint(String cheifComplaint) {
-        this.cheifComplaint = cheifComplaint;
+    public void setChiefComplaint(String chiefComplaint) {
+        this.chiefComplaint = chiefComplaint;
     }
 
     public int getPulse() {
@@ -191,7 +195,7 @@ public class Encounter {
                 ", icd10='" + icd10 + '\'' +
                 ", totalCost=" + totalCost +
                 ", copay=" + copay +
-                ", cheifComplaint='" + cheifComplaint + '\'' +
+                ", chiefComplaint='" + chiefComplaint + '\'' +
                 ", pulse=" + pulse +
                 ", systolic=" + systolic +
                 ", diastolic=" + diastolic +

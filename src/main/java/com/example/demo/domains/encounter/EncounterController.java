@@ -12,19 +12,35 @@ import java.util.List;
 
 @RestController
 @Validated
-@RequestMapping("/encounters")
 public class EncounterController {
 
     @Autowired
     EncounterService encounterService;
 
-    @GetMapping
-    public ResponseEntity<List<Encounter>> getAllEncounters() {
-        return new ResponseEntity<>(encounterService.getAll(), HttpStatus.OK);
+    @GetMapping("/patients/{patientId}/encounters")
+    public ResponseEntity<List<Encounter>> getAllEncounters(@PathVariable Long patientId) {
+        return new ResponseEntity<>(encounterService.getAll(patientId), HttpStatus.OK);
+    }
+
+    @GetMapping(("/patients/{patientId}/encounters/{id}"))
+    public ResponseEntity<Encounter> getEncounterById(@PathVariable Long patientId, @PathVariable Long id) {
+        return new ResponseEntity<>(encounterService.getById(patientId, id), HttpStatus.OK);
     }
 
     @PostMapping
     public ResponseEntity<Encounter> createPatient(@Valid @RequestBody Encounter encounter) {
         return new ResponseEntity<>(encounterService.createEncounter(encounter), HttpStatus.CREATED);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Encounter> updateEncounter(
+            @PathVariable Long id, @Valid @RequestBody Encounter encounter) {
+        return new ResponseEntity<>(encounterService.updateEncounter(id, encounter), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Encounter> deleteEncounter(@PathVariable Long id) {
+        encounterService.deleteEncounter(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

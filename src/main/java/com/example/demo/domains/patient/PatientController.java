@@ -21,12 +21,24 @@ public class PatientController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Patient> getPatientTypeById(@PathVariable Long id) {
+    public ResponseEntity<Patient> getPatientById(@PathVariable Long id) {
         return new ResponseEntity<>(patientService.getById(id), HttpStatus.OK);
     }
 
     @PostMapping
     public ResponseEntity<Patient> createPatient(@Valid @RequestBody Patient patient) {
         return new ResponseEntity<>(patientService.createPatient(patient), HttpStatus.CREATED);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Patient> updatePatient(
+            @PathVariable Long id, @Valid @RequestBody Patient patient) {
+        return new ResponseEntity<>(patientService.updatePatient(id, patient), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Patient> deletePatient(@PathVariable Long id) {
+        patientService.deletePatient(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
