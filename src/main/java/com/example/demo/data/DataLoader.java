@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
+
 @Component
 public class DataLoader implements CommandLineRunner {
 
@@ -34,48 +36,151 @@ public class DataLoader implements CommandLineRunner {
     }
 
     private void loadPatients() {
-       patient1 = patientRepository.save(new Patient("Kyle",
-               "Massey",
-               "717-13-5432",
-               "coryinthehouse@gmail.com",
-               "28 Constitution Dr",
-               "Champlin",
-               "MN"));
-       patient2 = patientRepository.save(new Patient("Robert",
-               "Kelly",
-               "555-55-5555",
-               "ignition@gmail.com",
-               "7262 Middle River St.",
-               "Fort Myers",
-               "FL"));
-       patient3 = patientRepository.save(new Patient("Jared",
-               "Fogle",
-               "666-66-6666",
-               "jared@quiznos.com",
-               "41 3rd Ave.",
-               "Belmont",
-               "MA"));
-       patient4 = patientRepository.save(new Patient("Drake",
-               "Bell",
-               "987-65-4321",
-               "bestman@gmail.com",
-               "8921 Park Lane",
-               "Terre Haute",
-               "IN"));
-       patient5 = patientRepository.save(new Patient("Jeffrey",
-               "Epstein",
-               "123-45-6789",
-               "didntoff@myself.com",
-               "8 Armstrong Drive",
-               "Rutherfordton",
-               "IL"));
+        patient1 = patientRepository.save(new Patient("Kyle",
+                "Massey",
+                "717-13-5432",
+                "coryinthehouse@gmail.com",
+                "28 Constitution Dr",
+                "Champlin",
+                "MN",
+                "12345",
+                31,
+                65,
+                210,
+                "Blue Cross",
+                "Male"
+        ));
+        patient2 = patientRepository.save(new Patient("Robert",
+                "Kelly",
+                "555-55-5555",
+                "ignition@gmail.com",
+                "7262 Middle River St.",
+                "Fort Myers",
+                "FL",
+                "12345",
+                57,
+                73,
+                190,
+                "Blue Cross",
+                "Male"));
+        patient3 = patientRepository.save(new Patient("Jared",
+                "Fogle",
+                "666-66-6666",
+                "jared@quiznos.com",
+                "41 3rd Ave.",
+                "Belmont",
+                "MA",
+                "12345",
+                45,
+                74,
+                345,
+                "Blue Cross",
+                "Male"));
+        patient4 = patientRepository.save(new Patient("Drake",
+                "Bell",
+                "987-65-4321",
+                "bestman@gmail.com",
+                "8921 Park Lane",
+                "Terre Haute",
+                "IN",
+                "12345",
+                36,
+                69,
+                175,
+                "Blue Cross",
+                "Male"));
+        patient5 = patientRepository.save(new Patient("Jeffrey",
+                "Epstein",
+                "123-45-6789",
+                "didntoff@myself.com",
+                "8 Armstrong Drive",
+                "Rutherfordton",
+                "IL",
+                "12345",
+                66,
+                68,
+                205,
+                "Blue Cross",
+                "Male"));
     }
     private void loadEncounters(){
-        encounter1 = encounterRepository.save(new Encounter(patient1,"notes", "visit code"));
-        encounter2 = encounterRepository.save(new Encounter(patient1,"pertains to patient1", "visit code"));
-        encounter3 = encounterRepository.save(new Encounter(patient2,"notes", "visit code"));
-        encounter4 = encounterRepository.save(new Encounter(patient2,"pertains to patient2", "visit code"));
-        encounter5 = encounterRepository.save(new Encounter(patient3,"notes", "visit code333"));
-        encounter6 = encounterRepository.save(new Encounter(patient4,"notes", "visit code444"));
+        encounter1 = encounterRepository.save(new Encounter(patient1,
+                "notes",
+                "visit code",
+                "Dr. Phil",
+                "123.456.789-12",
+                "A22",
+                299.99,
+                99.99,
+                "Concussion",
+                80,
+                120,
+                80,
+                new Date()));
+        encounter2 = encounterRepository.save(new Encounter(patient1,
+                "notes",
+                "visit code",
+                "Dr. Phil",
+                "123.456.789-12",
+                "A22",
+                299.99,
+                99.99,
+                "Concussion",
+                80,
+                120,
+                80,
+                new Date()));
+        encounter3 = encounterRepository.save(new Encounter(patient2,
+                "notes",
+                "visit code",
+                "Dr. Phil",
+                "123.456.789-12",
+                "A22",
+                299.99,
+                99.99,
+                "Concussion",
+                80,
+                120,
+                80,
+                new Date()));
+        encounter4 = encounterRepository.save(new Encounter(patient2,
+                "notes",
+                "visit code",
+                "Dr. Phil",
+                "123.456.789-12",
+                "A22",
+                299.99,
+                99.99,
+                "Concussion",
+                80,
+                120,
+                80,
+                new Date()));
+        encounter5 = encounterRepository.save(new Encounter(patient3,
+                "notes",
+                "visit code",
+                "Dr. Phil",
+                "123.456.789-12",
+                "A22",
+                299.99,
+                99.99,
+                "Concussion",
+                80,
+                120,
+                80,
+                new Date()));
+        encounter6 = encounterRepository.save(new Encounter(patient4,
+                "notes",
+                "visit code",
+                "Dr. Phil",
+                "123.456.789-12",
+                "A22",
+                299.99,
+                99.99,
+                "Concussion",
+                80,
+                120,
+                80,
+                new Date()));
     }
 }

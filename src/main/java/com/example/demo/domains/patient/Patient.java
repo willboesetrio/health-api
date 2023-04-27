@@ -31,14 +31,26 @@ public class Patient {
     private String city;
     @NotNull
     private String state;
-
+    @NotNull
+    private String postal;
+    @NotNull
+    private int age;
+    @NotNull
+    private int height;
+    @NotNull
+    private int weight;
+    @NotNull
+    private
+    String insurance;
+    @NotNull
+    private String gender;
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "patient")
     private Set<Encounter> encounters;
 
     public Patient() {
     }
 
-    public Patient(String firstName, String lastName, String ssn, String email, String street, String city, String state) {
+    public Patient(String firstName, String lastName, String ssn, String email, String street, String city, String state, String postal, int age, int height, int weight, String insurance, String gender) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.ssn = ssn;
@@ -46,6 +58,12 @@ public class Patient {
         this.street = street;
         this.city = city;
         this.state = state;
+        this.postal = postal;
+        this.age = age;
+        this.height = height;
+        this.weight = weight;
+        this.insurance = insurance;
+        this.gender = gender;
     }
 
     public Long getId() {
@@ -112,17 +130,70 @@ public class Patient {
         this.state = state;
     }
 
+    public String getPostal() {
+        return postal;
+    }
+
+    public void setPostal(String postal) {
+        this.postal = postal;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public int getWeight() {
+        return weight;
+    }
+
+    public void setWeight(int weight) {
+        this.weight = weight;
+    }
+
+    public String getInsurance() {
+        return insurance;
+    }
+
+    public void setInsurance(String insurance) {
+        this.insurance = insurance;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
     @Override
     public String toString() {
         return "Patient{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
+                "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", ssn='" + ssn + '\'' +
                 ", email='" + email + '\'' +
                 ", street='" + street + '\'' +
                 ", city='" + city + '\'' +
                 ", state='" + state + '\'' +
+                ", postal='" + postal + '\'' +
+                ", age=" + age +
+                ", height=" + height +
+                ", weight=" + weight +
+                ", insurance='" + insurance + '\'' +
+                ", gender='" + gender + '\'' +
                 '}';
     }
 }
