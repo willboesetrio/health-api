@@ -1,5 +1,7 @@
 package com.example.demo.domains.patient;
 
+import com.example.demo.domains.encounter.Encounter;
+import com.example.demo.domains.encounter.EncounterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
@@ -15,6 +17,8 @@ public class PatientServiceImpl implements PatientService{
 
     @Autowired
     private PatientRepository patientRepository;
+    @Autowired
+    private EncounterRepository encounterRepository;
     @Override
     public List<Patient> getAll() {
         return patientRepository.findAll();
@@ -68,7 +72,13 @@ public class PatientServiceImpl implements PatientService{
 
     @Override
     public void deletePatient(Long id) {
-        patientRepository.deleteById(id);
+        // check if this patient has any encounters
+        List<Encounter> allEncountersForPatient = encounterRepository.findByPatientId(id);
+        if (allEncountersForPatient.isEmpty()) {
+            patientRepository.deleteById(id);
+        } else {
+            throw new ResponseStatusException(HttpStatus.CONFLICT);
+        }
     }
 
 }

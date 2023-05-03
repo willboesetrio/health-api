@@ -58,24 +58,65 @@ public class EncounterServiceImpl implements  EncounterService{
     }
 
     @Override
-    public Encounter updateEncounter(Long id, Encounter encounter) {
-        try {
-            Optional<Encounter> encounterToUpdate = encounterRepository.findById(id);
-            if (encounterToUpdate.isEmpty()) {
-                throw new ResourceNotFoundException();
-            } else {
-                encounter.setId(id);
-                encounterRepository.save(encounter);
-            }
-        } catch (DataAccessException e) {
-            // logger.error(e.getMessage());
+    public Encounter updateEncounter(Encounter encounter, Long id, Long patientId) {
+        // check if patient exists
+        Optional<Patient> patientToUpdate = patientRepository.findById(patientId);
+        if (patientToUpdate.isEmpty()) {
+            throw new ResourceNotFoundException();
         }
-
+        // get all encounters associated with the patient ID
+        List<Encounter> allEncountersForPatient = encounterRepository.findByPatientId(patientId);
+        // check if there is an encounter among that list that matches the incoming (encounter) ID
+        boolean encounterExistsOnPatient = false;
+        for (Encounter e : allEncountersForPatient)
+        {
+            if (e.getId().equals(id)){
+                encounterExistsOnPatient = true;
+            }
+        }
+        if (encounterExistsOnPatient) {
+            encounter.setPatient(patientToUpdate.get());
+            encounter.setId(id);
+            encounterRepository.save(encounter);
+        } else {
+            throw  new ResourceNotFoundException();
+        }
         return encounter;
+//        try {
+//            Optional<Encounter> encounterToUpdate = encounterRepository.findById(id);
+//            if (encounterToUpdate.isEmpty()) {
+//                throw new ResourceNotFoundException();
+//            } else {
+//                encounter.setId(id);
+//                encounterRepository.save(encounter);
+//            }
+//        } catch (DataAccessException e) {
+//            // logger.error(e.getMessage());
+//        }
+//
+//        return encounter;
     }
 
     @Override
-    public void deleteEncounter(Long id) {
-        encounterRepository.deleteById(id);
+    public void deleteEncounter(Long patientId, Long id) {
+        Optional<Patient> patientToUpdate = patientRepository.findById(patientId);
+        if (patientToUpdate.isEmpty()) {
+            throw new ResourceNotFoundException();
+        }
+        // get all encounters associated with the patient ID
+        List<Encounter> allEncountersForPatient = encounterRepository.findByPatientId(patientId);
+        // check if there is an encounter among that list that matches the incoming (encounter) ID
+        boolean encounterExistsOnPatient = false;
+        for (Encounter e : allEncountersForPatient)
+        {
+            if (e.getId().equals(id)){
+                encounterExistsOnPatient = true;
+            }
+        }
+        if (encounterExistsOnPatient) {
+            encounterRepository.deleteById(id);
+        } else {
+            throw  new ResourceNotFoundException();
+        }
     }
 }

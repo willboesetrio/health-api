@@ -16,7 +16,7 @@ public interface EncounterService {
 
     Encounter createEncounter(Encounter encounter, Long patientId);
 
-    Encounter updateEncounter(Long id, Encounter encounter);
+    Encounter updateEncounter(Encounter encounter, Long id, Long patientId);
 
-    void deleteEncounter(Long id);
+    void deleteEncounter(Long patientId, Long id);
 }

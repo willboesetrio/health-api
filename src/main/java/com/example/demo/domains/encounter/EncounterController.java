@@ -32,15 +32,14 @@ public class EncounterController {
         return new ResponseEntity<>(encounterService.createEncounter(encounter, patientId), HttpStatus.CREATED);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Encounter> updateEncounter(
-            @PathVariable Long id, @Valid @RequestBody Encounter encounter) {
-        return new ResponseEntity<>(encounterService.updateEncounter(id, encounter), HttpStatus.OK);
+    @PutMapping("/patients/{patientId}/encounters/{id}")
+    public ResponseEntity<Encounter> updateEncounter(@Valid @RequestBody Encounter encounter, @PathVariable Long patientId, @PathVariable Long id) {
+        return new ResponseEntity<>(encounterService.updateEncounter(encounter, id, patientId), HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Encounter> deleteEncounter(@PathVariable Long id) {
-        encounterService.deleteEncounter(id);
+    @DeleteMapping("/patients/{patientId}/encounters/{id}")
+    public ResponseEntity<Encounter> deleteEncounter(@PathVariable Long patientId, @PathVariable Long id) {
+        encounterService.deleteEncounter(patientId, id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
