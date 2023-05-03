@@ -14,7 +14,7 @@ public interface EncounterService {
 
     Encounter getById (Long patientId, Long id);
 
-    Encounter createEncounter(Encounter encounter);
+    Encounter createEncounter(Encounter encounter, Long patientId);
 
     Encounter updateEncounter(Long id, Encounter encounter);
 

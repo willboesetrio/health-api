@@ -3,8 +3,9 @@ package com.example.demo.domains.patient;
 import com.example.demo.domains.encounter.Encounter;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.Set;
 
@@ -15,23 +16,31 @@ public class Patient {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
     @NotNull
-    @Size(min = 3, max=25)
+    @Size(min = 1, max=25)
+    @Pattern(regexp = "^[A-Za-z'\\- ]+$", message = "plz")
     private String firstName;
     @NotNull
-    @Size(min = 3, max=25)
+    @Size(min = 1, max=25)
+    @Pattern(regexp = "^[A-Za-z'\\- ]+$", message = "plz")
     private String lastName;
     @NotNull
+    @Pattern(regexp = "^\\d{3}-\\d{2}-\\d{4}$", message = "plz")
     private String ssn;
     @NotNull
     @Column(unique = true)
+    @Pattern(regexp = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}$", message = "plz")
     private String email;
     @NotNull
+    @NotEmpty
     private String street;
     @NotNull
+    @NotEmpty
     private String city;
     @NotNull
+    @Pattern(regexp = "^(?-i:A[LKSZRAEP]|C[AOT]|D[EC]|F[LM]|G[AU]|HI|I[ADLN]|K[SY]|LA|M[ADEHINOPST]|N[CDEHJMVY]|O[HKR]|P[ARW]|RI|S[CD]|T[NX]|UT|V[AIT]|W[AIVY])$", message = "plz")
     private String state;
     @NotNull
+    @Pattern(regexp = "^\\d{5}$|^\\d{5}-\\d{4}$", message = "plz")
     private String postal;
     @NotNull
     private int age;
@@ -43,6 +52,7 @@ public class Patient {
     private
     String insurance;
     @NotNull
+    @Pattern(regexp = "(?i)^Male$|^Female$|^Other$", message = "plz")
     private String gender;
 //    @OneToMany(fetch = FetchType.EAGER, mappedBy = "patient")
 //    private Set<Encounter> encounters;

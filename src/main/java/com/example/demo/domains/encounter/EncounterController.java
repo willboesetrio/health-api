@@ -27,9 +27,9 @@ public class EncounterController {
         return new ResponseEntity<>(encounterService.getById(patientId, id), HttpStatus.OK);
     }
 
-    @PostMapping
-    public ResponseEntity<Encounter> createPatient(@Valid @RequestBody Encounter encounter) {
-        return new ResponseEntity<>(encounterService.createEncounter(encounter), HttpStatus.CREATED);
+    @PostMapping("/patients/{patientId}/encounters")
+    public ResponseEntity<Encounter> createPatient(@Valid @RequestBody Encounter encounter, @PathVariable Long patientId) {
+        return new ResponseEntity<>(encounterService.createEncounter(encounter, patientId), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
