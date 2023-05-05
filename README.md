@@ -13,3 +13,4 @@ password: root
 https://api.postman.com/collections/27255543-cfba53ca-9693-4db0-a767-1cbce41ec6cd?access_key=PMAT-01GZMM29CVYEZRSWMFWB5HCH1Q
 ### Testing
 In progress...
+Run PatientServiceTest.java
