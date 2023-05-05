@@ -106,7 +106,7 @@ public class DataLoader implements CommandLineRunner {
     private void loadEncounters(){
         encounter1 = encounterRepository.save(new Encounter(patient1,
                 "notes",
-                "visit code",
+                "D1D 1D1",
                 "Dr. Phil",
                 "123.456.789-12",
                 "A22",
@@ -119,7 +119,7 @@ public class DataLoader implements CommandLineRunner {
                 new Date()));
         encounter2 = encounterRepository.save(new Encounter(patient1,
                 "notes",
-                "visit code",
+                "D1D 1D1",
                 "Dr. Phil",
                 "123.456.789-12",
                 "A22",
@@ -132,7 +132,7 @@ public class DataLoader implements CommandLineRunner {
                 new Date()));
         encounter3 = encounterRepository.save(new Encounter(patient2,
                 "notes",
-                "visit code",
+                "D1D 1D1",
                 "Dr. Phil",
                 "123.456.789-12",
                 "A22",
@@ -145,7 +145,7 @@ public class DataLoader implements CommandLineRunner {
                 new Date()));
         encounter4 = encounterRepository.save(new Encounter(patient2,
                 "notes",
-                "visit code",
+                "D1D 1D1",
                 "Dr. Phil",
                 "123.456.789-12",
                 "A22",
@@ -158,7 +158,7 @@ public class DataLoader implements CommandLineRunner {
                 new Date()));
         encounter5 = encounterRepository.save(new Encounter(patient3,
                 "notes",
-                "visit code",
+                "D1D 1D1",
                 "Dr. Phil",
                 "123.456.789-12",
                 "A22",
@@ -171,7 +171,7 @@ public class DataLoader implements CommandLineRunner {
                 new Date()));
         encounter6 = encounterRepository.save(new Encounter(patient4,
                 "notes",
-                "visit code",
+                "D1D 1D1",
                 "Dr. Phil",
                 "123.456.789-12",
                 "A22",

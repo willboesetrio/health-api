@@ -2,7 +2,7 @@ package com.example.demo.domains.encounter;
 
 import com.example.demo.domains.patient.Patient;
 import org.springframework.validation.annotation.Validated;
-
+import javax.validation.constraints.*;
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
@@ -29,19 +29,24 @@ public class Encounter {
     private String notes;
     @NotNull
     @NotEmpty
+    @Pattern(regexp = "^[a-zA-Z][0-9][a-zA-Z][ ][0-9][a-zA-Z][0-9]$", message="visit code err")
     private String visitCode;
     @NotNull
     @NotEmpty
     private String provider;
     @NotNull
     @NotEmpty
+    @Pattern(regexp = "^\\d{3}.\\d{3}.\\d{3}-\\d{2}$", message="billing code err")
     private String billingCode;
     @NotNull
     @NotEmpty
+    @Pattern(regexp = "^[a-zA-Z][\\d][\\d]$", message = "icd10 err")
     private String icd10;
     @NotNull
+    @Min(0)
     private double totalCost;
     @NotNull
+    @Min(0)
     private double copay;
     @NotNull
     @NotEmpty
