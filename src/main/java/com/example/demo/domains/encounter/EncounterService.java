@@ -6,6 +6,10 @@ import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
 
+/**
+ * interface for encounter entity service layer, methods implemented in EncounterServiceImpl
+ * @author Will Boese
+ */
 @Service
 @Validated
 public interface EncounterService {

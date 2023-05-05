@@ -10,6 +10,10 @@ import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
+/**
+ * Inserts data dummy data into the database once it is created
+ * @author Will Boese
+ */
 @Component
 public class DataLoader implements CommandLineRunner {
 
@@ -29,12 +33,20 @@ public class DataLoader implements CommandLineRunner {
     private Encounter encounter5;
     private Encounter encounter6;
 
+    /**
+     * calls helper methods which load data
+     * @param strings
+     * @throws Exception
+     */
     @Override
     public void run(String... strings) throws Exception{
         loadPatients();
         loadEncounters();
     }
 
+    /**
+     * creates dummy data for patients
+     */
     private void loadPatients() {
         patient1 = patientRepository.save(new Patient("Kyle",
                 "Massey",
@@ -103,6 +115,10 @@ public class DataLoader implements CommandLineRunner {
                 "Blue Cross",
                 "Male"));
     }
+
+    /**
+     * creates dummy data for encounters
+     */
     private void loadEncounters(){
         encounter1 = encounterRepository.save(new Encounter(patient1,
                 "notes",

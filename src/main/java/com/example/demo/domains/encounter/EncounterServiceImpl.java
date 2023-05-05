@@ -13,7 +13,10 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 import java.util.Optional;
 
-
+/**
+ * contains logic for the service layer of encounter entity
+ * @author Will Boese
+ */
 @Service
 @Validated
 public class EncounterServiceImpl implements  EncounterService{
@@ -23,11 +26,22 @@ public class EncounterServiceImpl implements  EncounterService{
     @Autowired
     PatientRepository patientRepository;
 
+    /**
+     * gets all encounters from a specific patient ID
+     * @param patientId
+     * @return
+     */
     @Override
     public List<Encounter> getAll(Long patientId) {
         return encounterRepository.findByPatientId(patientId);
     }
 
+    /**
+     * gets an individual encounter only if it exists in the list of encounters matching the passed in patient ID
+     * @param patientId
+     * @param id
+     * @return
+     */
     @Override
     public Encounter getById(Long patientId, Long id) {
         Optional<Encounter> encounter = Optional.empty();
@@ -42,6 +56,12 @@ public class EncounterServiceImpl implements  EncounterService{
         return encounter.get();
     }
 
+    /**
+     * creates a new encounter for the specified patient
+     * @param encounter
+     * @param patientId
+     * @return
+     */
     @Override
     public Encounter createEncounter(Encounter encounter, Long patientId) {
         Optional<Patient> currentPatient = patientRepository.findById(patientId);
@@ -57,6 +77,13 @@ public class EncounterServiceImpl implements  EncounterService{
         return encounterRepository.save(encounter);
     }
 
+    /**
+     * edits an encounter only if that encounter and patient already exist, and if that encounter already exists on that patient
+     * @param encounter
+     * @param id
+     * @param patientId
+     * @return
+     */
     @Override
     public Encounter updateEncounter(Encounter encounter, Long id, Long patientId) {
         // check if patient exists
@@ -82,21 +109,15 @@ public class EncounterServiceImpl implements  EncounterService{
             throw  new ResourceNotFoundException();
         }
         return encounter;
-//        try {
-//            Optional<Encounter> encounterToUpdate = encounterRepository.findById(id);
-//            if (encounterToUpdate.isEmpty()) {
-//                throw new ResourceNotFoundException();
-//            } else {
-//                encounter.setId(id);
-//                encounterRepository.save(encounter);
-//            }
-//        } catch (DataAccessException e) {
-//            // logger.error(e.getMessage());
-//        }
-//
-//        return encounter;
+
     }
 
+    /**
+     * deletes a specified encounter only id the patient ID on the encounter matches the patient ID in URL
+     * this method is actually not needed for front end project
+     * @param patientId
+     * @param id
+     */
     @Override
     public void deleteEncounter(Long patientId, Long id) {
         Optional<Patient> patientToUpdate = patientRepository.findById(patientId);

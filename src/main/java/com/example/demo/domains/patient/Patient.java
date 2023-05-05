@@ -6,6 +6,10 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.util.Set;
 
+/**
+ * represents patient table in the database
+ * @author Will Boese
+ */
 @Entity
 public class Patient {
 

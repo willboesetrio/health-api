@@ -11,6 +11,10 @@ import javax.validation.constraints.NotNull;
 import java.util.Date;
 import com.fasterxml.jackson.annotation.*;
 
+/**
+ * represents encounter table in the database
+ * @author Will Boese
+ */
 @Entity
 @Validated
 public class Encounter {

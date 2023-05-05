@@ -4,6 +4,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * interface for patient entity service layer, methods implemented in PatientServiceImpl
+ * @author Will Boese
+ */
 @Service
 public interface PatientService {
 
